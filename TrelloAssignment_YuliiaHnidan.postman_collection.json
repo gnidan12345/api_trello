@@ -1,0 +1,882 @@
+{
+	"info": {
+		"_postman_id": "bcdba24a-85bd-478c-891d-8099382eaf24",
+		"name": "TrelloAssignment_YuliiaHnidan",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "4051243"
+	},
+	"item": [
+		{
+			"name": "Create a board",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"pm.collectionVariables.set('idBoard', jsonData.id);\r",
+							"\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check board name\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.name).to.eql('NewBoard');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check permission\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.prefs.permissionLevel).to.eql('private');\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response time is less than 700ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(700);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Check viewType is Board\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.prefs.switcherViews[0].viewType).to.eql(\"Board\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check switcher Board is enabled\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.prefs.switcherViews[0].enabled).to.eql(true);\r",
+							"});\r",
+							"\r",
+							"var schema = {\r",
+							"  \"$schema\": \"http://json-schema.org/draft-04/schema#\",\r",
+							"  \"type\": \"object\",\r",
+							"  \"properties\": {\r",
+							"    \"id\": {\r",
+							"      \"type\": \"string\"\r",
+							"    },\r",
+							"    \"name\": {\r",
+							"      \"type\": \"string\"\r",
+							"    },\r",
+							"    \"desc\": {\r",
+							"      \"type\": \"string\"\r",
+							"    },\r",
+							"    \"descData\": {\r",
+							"      \"type\": \"null\"\r",
+							"    },\r",
+							"    \"closed\": {\r",
+							"      \"type\": \"boolean\"\r",
+							"    },\r",
+							"    \"idOrganization\": {\r",
+							"      \"type\": \"string\"\r",
+							"    },\r",
+							"    \"idEnterprise\": {\r",
+							"      \"type\": \"null\"\r",
+							"    },\r",
+							"    \"pinned\": {\r",
+							"      \"type\": \"boolean\"\r",
+							"    },\r",
+							"    \"url\": {\r",
+							"      \"type\": \"string\"\r",
+							"    },\r",
+							"    \"shortUrl\": {\r",
+							"      \"type\": \"string\"\r",
+							"    },\r",
+							"    \"prefs\": {\r",
+							"      \"type\": \"object\",\r",
+							"      \"properties\": {\r",
+							"        \"permissionLevel\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"hideVotes\": {\r",
+							"          \"type\": \"boolean\"\r",
+							"        },\r",
+							"        \"voting\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"comments\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"invitations\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"selfJoin\": {\r",
+							"          \"type\": \"boolean\"\r",
+							"        },\r",
+							"        \"cardCovers\": {\r",
+							"          \"type\": \"boolean\"\r",
+							"        },\r",
+							"        \"cardCounts\": {\r",
+							"          \"type\": \"boolean\"\r",
+							"        },\r",
+							"        \"isTemplate\": {\r",
+							"          \"type\": \"boolean\"\r",
+							"        },\r",
+							"        \"cardAging\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"calendarFeedEnabled\": {\r",
+							"          \"type\": \"boolean\"\r",
+							"        },\r",
+							"        \"hiddenPluginBoardButtons\": {\r",
+							"          \"type\": \"array\",\r",
+							"          \"items\": {}\r",
+							"        },\r",
+							"        \"switcherViews\": {\r",
+							"          \"type\": \"array\",\r",
+							"          \"items\": [\r",
+							"            {\r",
+							"              \"type\": \"object\",\r",
+							"              \"properties\": {\r",
+							"                \"viewType\": {\r",
+							"                  \"type\": \"string\"\r",
+							"                },\r",
+							"                \"enabled\": {\r",
+							"                  \"type\": \"boolean\"\r",
+							"                }\r",
+							"              },\r",
+							"              \"required\": [\r",
+							"                \"viewType\",\r",
+							"                \"enabled\"\r",
+							"              ]\r",
+							"            },\r",
+							"            {\r",
+							"              \"type\": \"object\",\r",
+							"              \"properties\": {\r",
+							"                \"viewType\": {\r",
+							"                  \"type\": \"string\"\r",
+							"                },\r",
+							"                \"enabled\": {\r",
+							"                  \"type\": \"boolean\"\r",
+							"                }\r",
+							"              },\r",
+							"              \"required\": [\r",
+							"                \"viewType\",\r",
+							"                \"enabled\"\r",
+							"              ]\r",
+							"            },\r",
+							"            {\r",
+							"              \"type\": \"object\",\r",
+							"              \"properties\": {\r",
+							"                \"viewType\": {\r",
+							"                  \"type\": \"string\"\r",
+							"                },\r",
+							"                \"enabled\": {\r",
+							"                  \"type\": \"boolean\"\r",
+							"                }\r",
+							"              },\r",
+							"              \"required\": [\r",
+							"                \"viewType\",\r",
+							"                \"enabled\"\r",
+							"              ]\r",
+							"            },\r",
+							"            {\r",
+							"              \"type\": \"object\",\r",
+							"              \"properties\": {\r",
+							"                \"viewType\": {\r",
+							"                  \"type\": \"string\"\r",
+							"                },\r",
+							"                \"enabled\": {\r",
+							"                  \"type\": \"boolean\"\r",
+							"                }\r",
+							"              },\r",
+							"              \"required\": [\r",
+							"                \"viewType\",\r",
+							"                \"enabled\"\r",
+							"              ]\r",
+							"            },\r",
+							"            {\r",
+							"              \"type\": \"object\",\r",
+							"              \"properties\": {\r",
+							"                \"viewType\": {\r",
+							"                  \"type\": \"string\"\r",
+							"                },\r",
+							"                \"enabled\": {\r",
+							"                  \"type\": \"boolean\"\r",
+							"                }\r",
+							"              },\r",
+							"              \"required\": [\r",
+							"                \"viewType\",\r",
+							"                \"enabled\"\r",
+							"              ]\r",
+							"            },\r",
+							"            {\r",
+							"              \"type\": \"object\",\r",
+							"              \"properties\": {\r",
+							"                \"viewType\": {\r",
+							"                  \"type\": \"string\"\r",
+							"                },\r",
+							"                \"enabled\": {\r",
+							"                  \"type\": \"boolean\"\r",
+							"                }\r",
+							"              },\r",
+							"              \"required\": [\r",
+							"                \"viewType\",\r",
+							"                \"enabled\"\r",
+							"              ]\r",
+							"            }\r",
+							"          ]\r",
+							"        },\r",
+							"        \"background\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"backgroundColor\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"backgroundImage\": {\r",
+							"          \"type\": \"null\"\r",
+							"        },\r",
+							"        \"backgroundTile\": {\r",
+							"          \"type\": \"boolean\"\r",
+							"        },\r",
+							"        \"backgroundBrightness\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"backgroundImageScaled\": {\r",
+							"          \"type\": \"null\"\r",
+							"        },\r",
+							"        \"backgroundBottomColor\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"backgroundTopColor\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"canBePublic\": {\r",
+							"          \"type\": \"boolean\"\r",
+							"        },\r",
+							"        \"canBeEnterprise\": {\r",
+							"          \"type\": \"boolean\"\r",
+							"        },\r",
+							"        \"canBeOrg\": {\r",
+							"          \"type\": \"boolean\"\r",
+							"        },\r",
+							"        \"canBePrivate\": {\r",
+							"          \"type\": \"boolean\"\r",
+							"        },\r",
+							"        \"canInvite\": {\r",
+							"          \"type\": \"boolean\"\r",
+							"        }\r",
+							"      },\r",
+							"      \"required\": [\r",
+							"        \"permissionLevel\",\r",
+							"        \"hideVotes\",\r",
+							"        \"voting\",\r",
+							"        \"comments\",\r",
+							"        \"invitations\",\r",
+							"        \"selfJoin\",\r",
+							"        \"cardCovers\",\r",
+							"        \"cardCounts\",\r",
+							"        \"isTemplate\",\r",
+							"        \"cardAging\",\r",
+							"        \"calendarFeedEnabled\",\r",
+							"        \"hiddenPluginBoardButtons\",\r",
+							"        \"switcherViews\",\r",
+							"        \"background\",\r",
+							"        \"backgroundColor\",\r",
+							"        \"backgroundImage\",\r",
+							"        \"backgroundTile\",\r",
+							"        \"backgroundBrightness\",\r",
+							"        \"backgroundImageScaled\",\r",
+							"        \"backgroundBottomColor\",\r",
+							"        \"backgroundTopColor\",\r",
+							"        \"canBePublic\",\r",
+							"        \"canBeEnterprise\",\r",
+							"        \"canBeOrg\",\r",
+							"        \"canBePrivate\",\r",
+							"        \"canInvite\"\r",
+							"      ]\r",
+							"    },\r",
+							"    \"labelNames\": {\r",
+							"      \"type\": \"object\",\r",
+							"      \"properties\": {\r",
+							"        \"green\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"yellow\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"orange\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"red\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"purple\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"blue\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"sky\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"lime\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"pink\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"black\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"green_dark\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"yellow_dark\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"orange_dark\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"red_dark\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"purple_dark\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"blue_dark\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"sky_dark\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"lime_dark\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"pink_dark\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"black_dark\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"green_light\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"yellow_light\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"orange_light\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"red_light\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"purple_light\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"blue_light\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"sky_light\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"lime_light\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"pink_light\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"black_light\": {\r",
+							"          \"type\": \"string\"\r",
+							"        }\r",
+							"      },\r",
+							"      \"required\": [\r",
+							"        \"green\",\r",
+							"        \"yellow\",\r",
+							"        \"orange\",\r",
+							"        \"red\",\r",
+							"        \"purple\",\r",
+							"        \"blue\",\r",
+							"        \"sky\",\r",
+							"        \"lime\",\r",
+							"        \"pink\",\r",
+							"        \"black\",\r",
+							"        \"green_dark\",\r",
+							"        \"yellow_dark\",\r",
+							"        \"orange_dark\",\r",
+							"        \"red_dark\",\r",
+							"        \"purple_dark\",\r",
+							"        \"blue_dark\",\r",
+							"        \"sky_dark\",\r",
+							"        \"lime_dark\",\r",
+							"        \"pink_dark\",\r",
+							"        \"black_dark\",\r",
+							"        \"green_light\",\r",
+							"        \"yellow_light\",\r",
+							"        \"orange_light\",\r",
+							"        \"red_light\",\r",
+							"        \"purple_light\",\r",
+							"        \"blue_light\",\r",
+							"        \"sky_light\",\r",
+							"        \"lime_light\",\r",
+							"        \"pink_light\",\r",
+							"        \"black_light\"\r",
+							"      ]\r",
+							"    },\r",
+							"    \"limits\": {\r",
+							"      \"type\": \"object\"\r",
+							"    }\r",
+							"  },\r",
+							"  \"required\": [\r",
+							"    \"id\",\r",
+							"    \"name\",\r",
+							"    \"desc\",\r",
+							"    \"descData\",\r",
+							"    \"closed\",\r",
+							"    \"idOrganization\",\r",
+							"    \"idEnterprise\",\r",
+							"    \"pinned\",\r",
+							"    \"url\",\r",
+							"    \"shortUrl\",\r",
+							"    \"prefs\",\r",
+							"    \"labelNames\",\r",
+							"    \"limits\"\r",
+							"  ]\r",
+							"}\r",
+							"\r",
+							"pm.test('Schema Validation', function() {\r",
+							" \r",
+							"    var result = tv4.validateResult(pm.response.json(), schema);\r",
+							" \r",
+							"    if(!result.valid){\r",
+							"        console.log(result);\r",
+							"    }\r",
+							" \r",
+							"    pm.expect(result.valid).to.be.true;\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"var schema = {\r",
+							"    \"items\": {\r",
+							"        \"type\": \"boolean\"\r",
+							"    }\r",
+							"};\r",
+							"\r",
+							"var data1 = [true, false];\r",
+							"var data2 = [true, 123];\r",
+							"\r",
+							"pm.test('Schema is valid', function () {\r",
+							"    pm.expect(tv4.validate(data1, schema)).to.be.true;\r",
+							"    pm.expect(tv4.validate(data2, schema)).to.be.true;\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.cookies.get('dsc')"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/boards/?name=NewBoard&key={{key}}&token={{token}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"boards",
+						""
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "NewBoard"
+						},
+						{
+							"key": "key",
+							"value": "{{key}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a list TODO",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"pm.collectionVariables.set('idListTODO', jsonData.id);\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check list name\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.name).to.eql(\"TODO\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check if the list is not closed\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.closed).to.eql(false);\r",
+							"});\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/lists?name=TODO&idBoard={{idBoard}}&key={{key}}&token={{token}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"lists"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "TODO"
+						},
+						{
+							"key": "idBoard",
+							"value": "{{idBoard}}"
+						},
+						{
+							"key": "key",
+							"value": "{{key}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a list DONE",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"pm.collectionVariables.set('idListDONE', jsonData.id);\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check the list name\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.name).to.eql(\"DONE\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check if the list is not closed\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.closed).to.eql(false);\r",
+							"});\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/lists?name=DONE&idBoard={{idBoard}}&key={{key}}&token={{token}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"lists"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "DONE"
+						},
+						{
+							"key": "idBoard",
+							"value": "{{idBoard}}"
+						},
+						{
+							"key": "key",
+							"value": "{{key}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a card",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"pm.collectionVariables.set('idCard', jsonData.id);\r",
+							"\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check the card name\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.name).to.eql(\"Learn Postman\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check if the card is not closed\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.closed).to.eql(false);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/cards?idList={{idListTODO}}&key={{key}}&token={{token}}&name=Learn Postman",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"cards"
+					],
+					"query": [
+						{
+							"key": "idList",
+							"value": "{{idListTODO}}"
+						},
+						{
+							"key": "key",
+							"value": "{{key}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token}}"
+						},
+						{
+							"key": "name",
+							"value": "Learn Postman"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update the card",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Status code is 200', function () {",
+							"    pm.response.to.have.status(200);",
+							"})",
+							"",
+							"pm.test('Check the card name', function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.name).to.eql('Learn Postman');",
+							"})",
+							"",
+							"pm.test(\"Check the card is in DONE list\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.idList).to.eql(pm.collectionVariables.get(\"idListDONE\"));",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/cards/{{idCard}}?key={{key}}&token={{token}}&idList={{idListDONE}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"cards",
+						"{{idCard}}"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{key}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token}}"
+						},
+						{
+							"key": "idList",
+							"value": "{{idListDONE}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete the board",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/boards/{{idBoard}}?key={{key}}&token={{token}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"boards",
+						"{{idBoard}}"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{key}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get the Board(deleted)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check the board doesn`t exist\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"The requested resource was not found.\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/boards/{{idBoard}}?key={{key}}&token={{token}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"boards",
+						"{{idBoard}}"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{key}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "idBoard",
+			"value": ""
+		},
+		{
+			"key": "idListTODO",
+			"value": ""
+		},
+		{
+			"key": "idListDONE",
+			"value": ""
+		},
+		{
+			"key": "idCard",
+			"value": ""
+		}
+	]
+}
